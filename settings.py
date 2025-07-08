@@ -65,7 +65,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://localhost:19006",    # if using Expo for React Native
 # ]
 
-ROOT_URLCONF = 'alxtravelapp.urls'
+ROOT_URLCONF = 'alx_travel_app.urls'
 
 TEMPLATES = [
     {
@@ -83,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'alxtravelapp.wsgi.application'
+WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
 
 
 # Database

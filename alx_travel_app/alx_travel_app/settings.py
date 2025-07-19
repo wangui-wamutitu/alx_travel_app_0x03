@@ -23,7 +23,6 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
-DATABASE_URL = env("DATABASE_URL")
 
 ALLOWED_HOSTS = []
 
@@ -91,9 +90,13 @@ WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
 
 
 DATABASES = {
-    'default': env.db(),  # parses DATABASE_URL from .env
-    'OPTIONS': {
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'alxtravel',
+        'USER': 'alxuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 CONN_MAX_AGE = 60

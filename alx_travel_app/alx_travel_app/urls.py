@@ -42,5 +42,6 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     # for API documentation users (e.g., frontend or third-party devs): elegant, structured read-only API documentation
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('api/', include('listings.urls'))
 ]
 

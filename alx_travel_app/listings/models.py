@@ -52,3 +52,21 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.guest} rated {self.listing} {self.rating}/5"
+
+class Payment(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Success', 'Success'),
+        ('Failed', 'Failed'),
+    ]
+
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3, default="ETB")
+    transaction_id = models.CharField(max_length=100, blank=True, null=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.booking.user.username} - {self.amount} - {self.status}"

@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .tasks import send_payment_confirmation_email
+from .tasks import send_booking_confirmation_email
 
 class ListingViewSet(viewsets.ModelViewSet):
     """
@@ -32,7 +33,8 @@ class BookingViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(guest=self.request.user)
+        booking = serializer.save(guest=self.request.user)
+        send_booking_confirmation_email.delay(booking.id)
 
 
 class PaymentViewSet(viewsets.ModelViewSet):
@@ -179,7 +181,6 @@ class PaymentViewSet(viewsets.ModelViewSet):
                     payment.booking.save()
                     payment.save()
                     
-                    # Send confirmation email asynchronously
                     send_payment_confirmation_email.delay(payment.id)
                     
                     serializer = self.get_serializer(payment)

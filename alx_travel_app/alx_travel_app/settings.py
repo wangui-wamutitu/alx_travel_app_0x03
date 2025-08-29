@@ -145,9 +145,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery Configuration
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
+# Celery settings
+
+# RabbitMQ broker (default: guest/guest on localhost:5672)
+CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
+
+# Where to store task results (can also be Redis, DB, or RPC)
+CELERY_RESULT_BACKEND = "rpc://"
+
+# Accept content types (only JSON for safety)
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+# Timezone awareness
+CELERY_ENABLE_UTC = True
+CELERY_TIMEZONE = "Africa/Nairobi"
+
+# Task execution options
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60  

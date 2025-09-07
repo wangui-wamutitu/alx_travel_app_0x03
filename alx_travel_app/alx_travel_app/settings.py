@@ -33,7 +33,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1',
-    'https://alx-travel-app-0x03-crqy.onrender.com',
+    'alx-travel-app-0x03-crqy.onrender.com',
 ]
 
 

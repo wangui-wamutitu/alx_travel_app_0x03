@@ -26,6 +26,9 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 PORT = int(os.environ.get('PORT', 8000))
 
+# Static files (required for gunicorn)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 ALLOWED_HOSTS = [
     'localhost', 
@@ -58,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 # Allow all origins (use with caution in dev only)
